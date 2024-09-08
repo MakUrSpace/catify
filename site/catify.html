@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catify Celebrities</title>
+    <link rel="stylesheet" href="catify.css">
+</head>
+<body>
+    <div class="background-container">
+        <div class="container">
+            <h1>Catify</h1>
+            <label for="openapi_key">Enter <a href="https://platform.openai.com/api-keys">OpenAI API Key</a>:</label>
+            <input type="text" id="openapi_key" placeholder="...">
+            <label for="catify_phrase">Enter Phrase to Catify:</label>
+            <input type="text" id="catify_phrase" placeholder="e.g. Albert Einstein pondering the universe">
+            <button id="generate-btn">Generate Cat Image</button>
+
+            <div id="loader" class="hidden"></div>
+
+            <div id="result">
+                <h2>Generated Image:</h2>
+                <img id="generated-img" src="" alt="Generated Cat Image of Celebrity" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generate-btn').addEventListener('click', async () => {
+            const catify_phrase = document.getElementById('catify_phrase').value;
+            const openapi_key = document.getElementById('openapi_key').value;
+
+            if (!catify_phrase) {
+                alert("Please enter a phrase to catify");
+                return;
+            }
+
+            if (!openapi_key) {
+                alert("Please enter a OpenAI API Key");
+                return;
+            }
+
+            const prompt = `A cat resembling ${catify_phrase}, with human-like features, in a realism art style.`;
+
+            try {
+                // Show loading spinner while the image is being generated
+                document.getElementById('loader').classList.remove('hidden');
+
+                // Call the DALL-E API via CORS proxy
+                const response = await fetch("https://api.openai.com/v1/images/generations", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${openapi_key}`,  // Your API key
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "dall-e-3",
+                        prompt: prompt,
+                        n: 1,
+                        size: "1024x1024"
+                    })
+                });
+
+                const data = await response.json();
+                const imageUrl = data.data[0].url;
+
+                // Display the image on the webpage
+                document.getElementById('generated-img').src = imageUrl;
+
+            } catch (error) {
+                console.error("Error generating the image:", error);
+                alert("Failed to generate image");
+            } finally {
+                // Hide loading spinner
+                document.getElementById('loader').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

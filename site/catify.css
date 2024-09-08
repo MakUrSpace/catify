@@ -1,0 +1,112 @@
+/* Basic page styling */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+/* Background image (GIF) for the entire page */
+.background-container {
+    background-image: url('https://i.gifer.com/41bt.gif'); /* Your GIF URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Add a slight overlay to darken the background for readability */
+.background-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+    z-index: -1; /* Send overlay behind content */
+}
+
+/* Central container */
+.container {
+    background-color: rgba(0, 0, 0, 0.8); /* More opaque to make text readable */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 350px;
+    z-index: 2; /* Ensure container stays above the overlay */
+}
+
+/* Title */
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #F8E71C;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Input field */
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+}
+
+/* Button */
+button {
+    padding: 12px 24px;
+    background-color: #FFD700;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FFC300;
+}
+
+/* Generated image */
+#generated-img {
+    max-width: 100%;
+    margin-top: 20px;
+    border: 4px solid #F8E71C;
+    border-radius: 12px;
+}
+
+/* Loading spinner */
+#loader {
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-top: 8px solid #F8E71C;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+/* Hidden class for loader */
+.hidden {
+    display: none;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

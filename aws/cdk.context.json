@@ -1,0 +1,10 @@
+{
+  "hosted-zone:account=077668039895:domainName=makurspace.com:region=us-east-2": {
+    "Id": "/hostedzone/Z04731742233AK5CF7E2D",
+    "Name": "makurspace.com."
+  },
+  "hosted-zone:account=077668039895:domainName=makurspace.com:region=us-east-1": {
+    "Id": "/hostedzone/Z04731742233AK5CF7E2D",
+    "Name": "makurspace.com."
+  }
+}
